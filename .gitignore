@@ -1,6 +1,5 @@
 /venv/*
 /.idea/*
-*.md
 *.sqlite3
 /geekshop/__pycache__/*
 /mainapp/__pycache__/*
