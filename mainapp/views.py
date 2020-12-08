@@ -12,14 +12,17 @@ def main(request):
 def products(request, pk=None):
     title = 'GeekShop - Каталог'
     categories = ProductCategory.objects.all()
-    products = Product.objects.all()
+    if pk is None:
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(category=ProductCategory.objects.get(uid=pk))
     context = {
         'title': title,
         'categories': categories,
         'products': products,
     }
-    print(pk)
     return render(request, 'mainapp/products.html', context)
+
 
 def contact(request):
     context = {
