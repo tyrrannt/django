@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ProductCategory, Product
+from mainapp.models import ProductCategory, Product
 
 
 def main(request):
