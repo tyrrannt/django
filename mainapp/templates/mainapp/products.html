@@ -1,5 +1,5 @@
 {% extends 'mainapp/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block css %}
 <title>{{ title | title }}</title>
@@ -17,11 +17,9 @@
 
             <h1 class="my-4">GeekShop</h1>
             <div class="list-group">
-                <a href="#" class="list-group-item">Новинки</a>
-                <a href="#" class="list-group-item">Одежда</a>
-                <a href="#" class="list-group-item">Обувь</a>
-                <a href="#" class="list-group-item">Аксессуары</a>
-                <a href="#" class="list-group-item">Подарки</a>
+                {% for category in categories %}
+                <a href="{% url 'products:index' %}{{ category.uid }}" class="list-group-item">{{ category.name }}</a>
+                {% endfor %}
             </div>
 
         </div>
@@ -60,20 +58,20 @@
             </div>
 
             <div class="row">
-                {% for first in items %}
+                {% for product in products %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="{{ first.0 }}">
-                            <img class="card-img-top" src="{% static first.1 %}"
+                        <a href="#">
+                            <img class="card-img-top" src="/media/{{  product.image }}"
                                 alt="">
                         </a>
                         <div class="card-body">
 
                                 <h4 class="card-title">
-                                <a href="{{ first.2 }}">{{ first.3 }}</a>
+                                <a href="#">{{ product.name }}</a>
                                 </h4>
-                                <h5>{{ first.4 }} руб.</h5>
-                                <p class="card-text">{{ first.5 }}</p>
+                                <h5>{{ product.price }} руб.</h5>
+                                <p class="card-text">{{ product.short_desc }}</p>
 
                         </div>
                         <div class="card-footer text-center">

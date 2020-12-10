@@ -1,0 +1,13 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<title>{{ title | title }}</title>
+<!-- Custom styles for this template -->
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{%  block contents %}
+<!-- Page Content -->
+
+{% endblock %}
