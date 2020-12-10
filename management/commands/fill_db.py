@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from mainapp.models import ProductCategory, Product
+from authapp.models import ShopUser
 
 JSON_PATH = 'mainapp/fixtures'
 
@@ -36,4 +37,12 @@ class Command(BaseCommand):
             new_product.save()
 
         # Создаем суперпользователя при помощи менеджера модели
-        super_user = User.objects.create_superuser('admin', 'django@geekshop.local', 'geekbrains')
+        super_user = ShopUser.objects.create_superuser('admin', 'shakirov.vitaliy@gmail.com', 'admin', age=39)
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
