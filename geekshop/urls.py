@@ -13,6 +13,7 @@ urlpatterns = [
     path('', mainapp_views.main, name='index'),
     path('contact/', mainapp_views.contact, name='contact'),
     path('products/', include('mainapp.urls', namespace='products')),
+    path('auth/', include('authapp.urls', namespace='auth')),
 ]
 
 if settings.DEBUG:
