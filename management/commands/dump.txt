@@ -5,3 +5,6 @@ manage.py dumpdata mainapp.Product > mainapp\fixtures\product.json
 manage.py loaddata mainapp\fixtures\users.json
 manage.py loaddata mainapp\fixtures\category.json
 manage.py loaddata mainapp\fixtures\product.json
+
+manage.py makemigrations
+manage.py migrate
