@@ -36,7 +36,7 @@ def register(request):
 
         if register_form.is_valid():
             register_form.save()
-            return HttpResponseRedirect(reverse('auth:login'))
+            return HttpResponseRedirect(reverse('authapp:login'))
     else:
         register_form = ShopUserRegisterForm()
 
@@ -52,7 +52,7 @@ def edit(request):
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('auth:edit'))
+            return HttpResponseRedirect(reverse('authapp:login'))
     else:
         edit_form = ShopUserEditForm(instance=request.user)
 
