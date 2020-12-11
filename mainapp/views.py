@@ -10,12 +10,14 @@ def main(request):
 
 
 def products(request, pk=None):
-    title = 'GeekShop - Каталог'
+
     categories = ProductCategory.objects.all()
     if pk is None:
         products = Product.objects.all()
+        title = 'GeekShop - Каталог'
     else:
         products = Product.objects.filter(category=ProductCategory.objects.get(uid=pk))
+        title = 'GeekShop - ' + ProductCategory.objects.get(uid=pk).name
     context = {
         'title': title,
         'categories': categories,

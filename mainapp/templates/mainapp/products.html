@@ -42,16 +42,27 @@
                                 alt="">
                         </a>
                         <div class="card-body">
-
                                 <h4 class="card-title">
                                 <a href="#">{{ product.name }}</a>
                                 </h4>
                                 <h5>{{ product.price }} руб.</h5>
                                 <p class="card-text">{{ product.short_desc }}</p>
-
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#">
+                            <img class="card-img-top" src="/media/products_images/404.jpg"
+                                alt="">
+                        </a>
+                        <div class="card-body">
+                                <h4 class="card-title">Товара в данной категории нет!</h4>
+                                <p class="card-text">Мы работаем над заполнением данной категории!</p>
                         </div>
                     </div>
                 </div>
