@@ -20,6 +20,7 @@ def products(request, pk=None):
         'title': title,
         'categories': categories,
         'products': products,
+        'pk': pk,
     }
     return render(request, 'mainapp/products.html', context)
 
