@@ -14,3 +14,4 @@ manage.py loaddata mainapp\fixtures\product.json
 
 #Данные пользователя
 admin:admin
+GeekBrains:Geek2020
