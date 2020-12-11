@@ -7,7 +7,7 @@
     </div>
     <form class="form-horizontal bg-light" action="{% url 'auth:login' %}" method="post">
         {% csrf_token %}
-        {{ login_form.as_p }}
+        {{ login_form.as_table }}
         <br>
         <input class="form-control" type="submit" value="войти">
     </form>
