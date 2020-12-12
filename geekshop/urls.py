@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 from mainapp import views as mainapp_views
 from django.conf.urls import include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp_views.main, name='index'),

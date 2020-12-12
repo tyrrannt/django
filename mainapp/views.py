@@ -10,7 +10,6 @@ def main(request):
 
 
 def products(request, pk=None):
-
     categories = ProductCategory.objects.all()
     if pk is None:
         products = Product.objects.all()
