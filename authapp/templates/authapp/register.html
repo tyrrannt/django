@@ -3,10 +3,22 @@
 
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ register_form.as_table }}
-        <br>
-        <input class="form-control" type="submit" value="зарегистрироваться">
-    </form>
+    <div class="col-lg-7">
+        {% if register_form.errors %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 50px;">
+                {{ register_form.errors }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <form class="form-horizontal" action="{% url 'auth:register' %}" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ register_form.as_table }}
+            <br>
+            <input class="form-control" type="submit" value="зарегистрироваться">
+        </form>
+
+    </div>
 {% endblock %}
