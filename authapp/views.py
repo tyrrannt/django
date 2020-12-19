@@ -49,4 +49,4 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
     content = {'title': title, 'edit_form': edit_form}
-    return render(request, 'authapp/edit.html', content)
+    return render(request, 'authapp/profile.html', content)
