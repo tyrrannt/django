@@ -4,21 +4,19 @@ from authapp.forms import ShopUserRegisterForm
 from authapp.forms import ShopUserEditForm
 from django.contrib import auth, messages
 from django.urls import reverse
+from basketapp.models import Basket
 
 
 def login(request):
     title = 'вход'
-
     if request.method == 'POST':
         login_form = ShopUserLoginForm(data=request.POST)
         if login_form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-
             user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
                 auth.login(request, user)
-
                 return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         login_form = ShopUserLoginForm()
@@ -35,7 +33,6 @@ def register(request):
     title = 'регистрация'
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
-
         if register_form.is_valid():
             register_form.save()
             messages.success(request, 'Вы успешно зарегистрировались!')
@@ -52,9 +49,13 @@ def edit(request):
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
             edit_form.save()
-            messages.success()
-            return HttpResponseRedirect(reverse('authapp:login'))
+            messages.success(request, 'Изменения успешно сохранены!')
+            return HttpResponseRedirect(reverse('authapp:edit'))
     else:
         edit_form = ShopUserEditForm(instance=request.user)
-    content = {'title': title, 'edit_form': edit_form}
+    content = {
+        'title': title,
+        'edit_form': edit_form,
+        'baskets': Basket.objects.filter(user=request.user),
+    }
     return render(request, 'authapp/profile.html', content)
