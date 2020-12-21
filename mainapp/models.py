@@ -11,6 +11,10 @@ class ProductCategory(models.Model):
     description = models.TextField(verbose_name='описание', blank=True)
 
     def __str__(self):
+        """
+        Переопределение стандартного метода str
+        :return: Возвращает заданное пользователем представление экземпляра класса
+        """
         return self.name
 
 
@@ -28,4 +32,8 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0)
 
     def __str__(self):
+        """
+        Переопределение стандартного метода str
+        :return: Возвращает заданное пользователем представление экземпляра класса
+        """
         return f'{self.name} ({self.category.name})'

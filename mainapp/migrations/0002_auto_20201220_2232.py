@@ -5,7 +5,6 @@ import utilities.files
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('mainapp', '0001_initial'),
     ]

@@ -18,6 +18,7 @@ class ShopUserLoginForm(AuthenticationForm):
 
 class ShopUserEditForm(UserChangeForm):
     avatar = forms.ImageField(widget=forms.FileInput)
+
     class Meta:
         model = ShopUser
         fields = ('username', 'first_name', 'last_name', 'email', 'age', 'birthday', 'password', 'avatar')
@@ -31,7 +32,6 @@ class ShopUserEditForm(UserChangeForm):
             field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
-
 
     def clean_age(self):
         data = self.cleaned_data['age']

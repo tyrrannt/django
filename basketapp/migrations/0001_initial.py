@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -22,7 +21,8 @@ class Migration(migrations.Migration):
                 ('quantity', models.PositiveIntegerField(default=0, verbose_name='количество')),
                 ('add_datetime', models.DateTimeField(auto_now_add=True, verbose_name='время')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.Product')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='basket', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='basket',
+                                           to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

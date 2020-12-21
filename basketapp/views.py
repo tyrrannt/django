@@ -3,9 +3,13 @@ from basketapp.models import Basket
 from mainapp.models import Product
 from django.contrib import messages
 from django.urls import reverse
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 from authapp.forms import ShopUserEditForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def basket(request):
     title = 'Просмотр корзины'
     edit_form = ShopUserEditForm(instance=request.user)
@@ -20,11 +24,9 @@ def basket(request):
     return render(request, 'authapp/profile.html', content)
 
 
+@login_required
 def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    if not request.user.is_authenticated:
-        messages.warning(request, 'Для добавления в корзину товаров Вы должны войти в ЛК!')
-        return HttpResponseRedirect(reverse('authapp:login'))
     basket = Basket.objects.filter(user=request.user, product=product).first()
     if not basket:
         basket = Basket(user=request.user, product=product)
@@ -33,13 +35,36 @@ def basket_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
 def basket_all_remove(request):
     baskets = Basket.objects.filter(user=request.user)
     for basket in baskets:
         basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@login_required
 def basket_remove(request, id):
     basket = Basket.objects.get(id=id)
     basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def basket_edit(request, id, quantity):
+    if request.is_ajax():
+        quantity = int(quantity)
+        basket = Basket.objects.get(id=int(id))
+        if quantity > 0:
+            basket.quantity = quantity
+            basket.save()
+        else:
+            basket.delete()
+        baskets = Basket.objects.filter(user=request.user)
+        context = {
+            'baskets': baskets,
+            'total_quantity': sum(basket.quantity for basket in baskets),
+            'total_sum': sum(basket.sum() for basket in baskets),
+        }
+        result = render_to_string('basketapp/basket.html', context)
+        return JsonResponse({'result': result})

@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -30,7 +29,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, verbose_name='описание продукта')),
                 ('price', models.DecimalField(decimal_places=2, default=0, max_digits=8, verbose_name='цена продукта')),
                 ('quantity', models.PositiveIntegerField(default=0, verbose_name='количество на складе')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.ProductCategory')),
+                ('category',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.ProductCategory')),
             ],
         ),
     ]
