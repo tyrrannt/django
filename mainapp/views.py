@@ -21,7 +21,7 @@ def products(request, pk=None):
             products = Product.objects.all().order_by('price')
 
         else:
-            categories = get_object_or_404(ProductCategory, pk=pk)
+            #categories = get_object_or_404(ProductCategory, pk=pk)
             products = Product.objects.filter(category=ProductCategory.objects.get(uid=pk)).order_by('price')
             title = 'GeekShop - ' + ProductCategory.objects.get(uid=pk).name
         context = {
