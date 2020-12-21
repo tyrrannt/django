@@ -53,9 +53,13 @@ def edit(request):
             return HttpResponseRedirect(reverse('authapp:edit'))
     else:
         edit_form = ShopUserEditForm(instance=request.user)
+
+    baskets = Basket.objects.filter(user=request.user)
     content = {
         'title': title,
         'edit_form': edit_form,
-        'baskets': Basket.objects.filter(user=request.user),
+        'baskets': baskets,
+        'total_quantity': sum(basket.quantity for basket in baskets),
+        'total_sum': sum(basket.sum() for basket in baskets),
     }
     return render(request, 'authapp/profile.html', content)

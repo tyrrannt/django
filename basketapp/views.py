@@ -9,11 +9,13 @@ from authapp.forms import ShopUserEditForm
 def basket(request):
     title = 'Просмотр корзины'
     edit_form = ShopUserEditForm(instance=request.user)
-    basket = Basket.objects.filter(user=request.user)
+    baskets = Basket.objects.filter(user=request.user)
     content = {
         'title': title,
         'edit_form': edit_form,
-        'baskets': basket,
+        'baskets': baskets,
+        'total_quantity': sum(basket.quantity for basket in baskets),
+        'total_sum': sum(basket.sum() for basket in baskets),
     }
     return render(request, 'authapp/profile.html', content)
 
@@ -31,9 +33,11 @@ def basket_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def basket_all_remove(request, pk):
-    content = {}
-    return render(request, 'basketapp/basket.html', content)
+def basket_all_remove(request):
+    baskets = Basket.objects.filter(user=request.user)
+    for basket in baskets:
+        basket.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def basket_remove(request, id):
     basket = Basket.objects.get(id=id)

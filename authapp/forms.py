@@ -17,6 +17,7 @@ class ShopUserLoginForm(AuthenticationForm):
 
 
 class ShopUserEditForm(UserChangeForm):
+    avatar = forms.ImageField(widget=forms.FileInput)
     class Meta:
         model = ShopUser
         fields = ('username', 'first_name', 'last_name', 'email', 'age', 'birthday', 'password', 'avatar')
