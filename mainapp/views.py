@@ -26,20 +26,17 @@ def products(request, pk=None):
             title = 'GeekShop - ' + ProductCategory.objects.get(uid=pk).name
         context = {
             'title': title,
-            #'links_menu': links_menu,
             'categories': categories,
             'products': products,
             'baskets': basket,
             'pk': pk,
         }
-
         return render(request, 'mainapp/products.html', context)
 
     else:
         products = Product.objects.all()
         context = {
             'title': title,
-            #'links_menu': links_menu,
             'categories': categories,
             'products': products,
             'baskets': basket,

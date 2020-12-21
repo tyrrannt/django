@@ -3,14 +3,19 @@ from basketapp.models import Basket
 from mainapp.models import Product
 from django.contrib import messages
 from django.urls import reverse
+from authapp.forms import ShopUserEditForm
 
 
 def basket(request):
+    title = 'Просмотр корзины'
+    edit_form = ShopUserEditForm(instance=request.user)
     basket = Basket.objects.filter(user=request.user)
     content = {
+        'title': title,
+        'edit_form': edit_form,
         'baskets': basket,
     }
-    return render(request, 'basketapp/basket.html', content)
+    return render(request, 'authapp/profile.html', content)
 
 
 def basket_add(request, pk):
