@@ -5,6 +5,7 @@ from authapp.forms import ShopUserEditForm
 from django.contrib import auth, messages
 from django.urls import reverse
 from basketapp.models import Basket
+from django.contrib.auth.decorators import login_required
 
 
 def login(request):
@@ -43,6 +44,7 @@ def register(request):
     return render(request, 'authapp/register.html', content)
 
 
+@login_required
 def edit(request):
     title = 'редактирование'
     if request.method == 'POST':
