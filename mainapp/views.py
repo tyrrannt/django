@@ -10,6 +10,22 @@ def main(request):
     return render(request, 'mainapp/index.html', context)
 
 
+def product_item(request, pk, id):
+    basket = []
+    title = 'GeekShop - Каталог'
+    categories = ProductCategory.objects.all()
+    product = Product.objects.get(uid=id)
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+    context = {
+        'baskets': basket,
+        'categories': categories,
+        'title': title,
+        'product': product,
+    }
+    return render(request, 'mainapp/product.html', context)
+
+
 def products(request, pk=None):
     basket = []
     title = 'GeekShop - Каталог'
