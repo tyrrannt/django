@@ -1,5 +1,25 @@
 from os import path
 from hashlib import sha256
+from datetime import date
+import datetime as dt
+
+
+def calculate_age(birthday):
+    """
+    Функция подсчета возраста на текущую дату
+    :param birthday: Передается дата рождения, строкового типа
+    :return: Возвращает возраст на текущую дату, строкового типа
+    """
+    born = dt.datetime.strptime(birthday.replace('-', ''), '%Y%m%d').date()
+    today = date.today()
+    try:
+        birthday = born.replace(year=today.year)
+    except ValueError:  # перехватывает ошибку когда дата рождения-29 февраля, а текущий год не является високосным
+        birthday = born.replace(year=today.year, month=born.month + 1, day=1)
+    if birthday > today:
+        return str(today.year - born.year - 1)
+    else:
+        return str(today.year - born.year)
 
 
 def hash_string(filename):

@@ -6,6 +6,7 @@ from django.contrib import auth, messages
 from django.urls import reverse
 from basketapp.models import Basket
 from django.contrib.auth.decorators import login_required
+from utilities.files import calculate_age
 
 
 def login(request):
@@ -48,6 +49,15 @@ def register(request):
 def edit(request):
     title = 'редактирование'
     if request.method == 'POST':
+        # Подсчитываем возраст автоматически на основании даты рождения
+        try:
+            _mutable = request.POST._mutable
+            request.POST._mutable = True
+            request.POST['age'] = calculate_age(request.POST['birthday'])
+            request.POST._mutable = _mutable
+        except:
+            messages.warning(request, 'Не указана дата рождения! Возраст не определен, и оставлен без изменения!')
+
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
             edit_form.save()
