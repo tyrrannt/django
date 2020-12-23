@@ -23,6 +23,7 @@ manage.py migrate
 manage.py loaddata mainapp\fixtures\users.json
 manage.py loaddata mainapp\fixtures\category.json
 manage.py loaddata mainapp\fixtures\product.json
+manage.py loaddata mainapp\fixtures\basket.json
 ```
 
 >Данные пользователя:
@@ -37,4 +38,5 @@ GeekBrains:Geek2020
 manage.py dumpdata authapp.ShopUser > mainapp\fixtures\users.json
 manage.py dumpdata mainapp.ProductCategory > mainapp\fixtures\category.json
 manage.py dumpdata mainapp.Product > mainapp\fixtures\product.json
+manage.py dumpdata basketapp.Basket > mainapp\fixtures\basket.json
 ```

@@ -11,3 +11,7 @@ six==1.15.0
 sqlparse==0.4.1
 toml==0.10.2
 wrapt==1.12.1
+psycopg2==2.8.6
+# при возникновении ошибки:
+# django.core.exceptions.ImproperlyConfigured: Error loading psycopg module: No module named psycopg
+# следует воспользоваться командой: pip3 install psycopg2-binary
