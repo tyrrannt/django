@@ -1,0 +1,22 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h1 class="mt-4">Создание продукта</h1>
+    <form action="{% url 'admin_staff:products_item_create' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <div class="form-row">
+            <div class="col-lg-12" style="margin-top: 33px;">
+                <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+            </div>
+        </div>
+    </form>
+{% endblock %}

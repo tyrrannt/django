@@ -1,0 +1,53 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="card-title"><h1 class="mt-4">Административная панель</h1></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <img src="{% static '/vendor/img/users.png' %}" width="150" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Пользователи</h5>
+                            <p class="card-text">Всего пользователей: {{ user|length }}</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <img src="{% static '/vendor/img/categ.png' %}" width="150" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Категории</h5>
+                            <p class="card-text">Всего категорий: {{ category|length }}</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <img src="{% static '/vendor/img/shopping.png' %}" width="150" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Товары</h5>
+                            <p class="card-text">Всего товаров: {{ product|length }}</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <h1 class="mt-4">Продукты</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            Продукты
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Категория</th>
+                        <th>Краткое описание</th>
+                        <th>Цена</th>
+                        <th>Количество на складе</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Категория</th>
+                        <th>Краткое описание</th>
+                        <th>Цена</th>
+                        <th>Количество на складе</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for elem in products %}
+                        <tr>
+                            <td><a href="{% url 'admin_staff:products_item_update' elem.pk %}"
+                                   style="color: dodgerblue">{{ elem.pk }}</a></td>
+                            <td>{{ elem.name }}</td>
+                            <td>{{ elem.category }}</td>
+                            <td>{{ elem.short_desc }}</td>
+                            <td class="text-center">{{ elem.price }}</td>
+                            <td class="text-center">{{ elem.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'admin_staff:products_item_create' %}">
+                <button class="btn btn-success">Добавить товар</button>
+            </a>
+        </div>
+    </div>
+    {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+

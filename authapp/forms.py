@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from authapp.models import ShopUser
 from django import forms
-from django.forms.widgets import SelectDateWidget
 
 
 class ShopUserLoginForm(AuthenticationForm):

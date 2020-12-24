@@ -1,1 +1,86 @@
-[{"model": "authapp.shopuser", "pk": 1, "fields": {"password": "pbkdf2_sha256$150000$2cekHcuy9NAg$zVHceAgCbSUjBHpkyVvOHQrPlWpPjIGSv8yByedoJGk=", "last_login": "2020-12-23T11:21:49.478Z", "is_superuser": true, "username": "admin", "first_name": "\u0412\u0438\u0442\u0430\u043b\u0438\u0439", "last_name": "\u0428\u0430\u043a\u0438\u0440\u043e\u0432", "email": "shakirov.vitaliy@gmail.com", "is_staff": true, "is_active": true, "date_joined": "2020-12-10T13:18:31Z", "avatar": "users_avatars/admin.jpg", "age": 38, "birthday": "1981-12-30", "groups": [], "user_permissions": []}}, {"model": "authapp.shopuser", "pk": 4, "fields": {"password": "pbkdf2_sha256$150000$d3jxGJmJgVYF$8uglRnMQTKYE+2V8IQwU/JlZ8xSOdJX7SfdrCWoxRyQ=", "last_login": "2020-12-19T11:48:07.745Z", "is_superuser": false, "username": "GeekBrains", "first_name": "GeekBrains", "last_name": "GeekBrains", "email": "shakirov.vitaliy@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2020-12-11T10:21:45.161Z", "avatar": "users_avatars/sweetest-witchy.jpg", "age": 19, "birthday": "1980-10-10", "groups": [], "user_permissions": []}}, {"model": "authapp.shopuser", "pk": 5, "fields": {"password": "pbkdf2_sha256$150000$isAqlEKh8FtK$iiDQeWC58HMavJzNXdAYVb/lAxjfMMNxHNaK1et5Cxw=", "last_login": "2020-12-19T11:49:08.704Z", "is_superuser": false, "username": "anna", "first_name": "\u0410\u043d\u043d\u0430", "last_name": "\u0410\u0443\u043b\u044c", "email": "annabella81@mail.ru", "is_staff": false, "is_active": true, "date_joined": "2020-12-12T14:19:28.116Z", "avatar": "", "age": 19, "birthday": null, "groups": [], "user_permissions": []}}, {"model": "authapp.shopuser", "pk": 6, "fields": {"password": "pbkdf2_sha256$150000$de54CDNOm2eD$+IyZZkBDiAAaxzqSwqXgPl6pys6msNroZ+vGIh+Esew=", "last_login": "2020-12-19T12:52:59.085Z", "is_superuser": false, "username": "adminroot119633", "first_name": "\u0412\u0438\u043a\u0442\u043e\u0440", "last_name": "\u0411\u0430\u0440\u0445\u043e\u0442\u043e\u0432", "email": "shakirov.vitaliy@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2020-12-19T12:52:52.491Z", "avatar": "", "age": 25, "birthday": null, "groups": [], "user_permissions": []}}]
+[
+  {
+    "model": "authapp.shopuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$2cekHcuy9NAg$zVHceAgCbSUjBHpkyVvOHQrPlWpPjIGSv8yByedoJGk=",
+      "last_login": "2020-12-23T11:21:49.478Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "\u0412\u0438\u0442\u0430\u043b\u0438\u0439",
+      "last_name": "\u0428\u0430\u043a\u0438\u0440\u043e\u0432",
+      "email": "shakirov.vitaliy@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-12-10T13:18:31Z",
+      "avatar": "users_avatars/admin.jpg",
+      "age": 38,
+      "birthday": "1981-12-30",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$d3jxGJmJgVYF$8uglRnMQTKYE+2V8IQwU/JlZ8xSOdJX7SfdrCWoxRyQ=",
+      "last_login": "2020-12-19T11:48:07.745Z",
+      "is_superuser": false,
+      "username": "GeekBrains",
+      "first_name": "GeekBrains",
+      "last_name": "GeekBrains",
+      "email": "shakirov.vitaliy@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-11T10:21:45.161Z",
+      "avatar": "users_avatars/sweetest-witchy.jpg",
+      "age": 19,
+      "birthday": "1980-10-10",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$isAqlEKh8FtK$iiDQeWC58HMavJzNXdAYVb/lAxjfMMNxHNaK1et5Cxw=",
+      "last_login": "2020-12-19T11:49:08.704Z",
+      "is_superuser": false,
+      "username": "anna",
+      "first_name": "\u0410\u043d\u043d\u0430",
+      "last_name": "\u0410\u0443\u043b\u044c",
+      "email": "annabella81@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-12T14:19:28.116Z",
+      "avatar": "",
+      "age": 19,
+      "birthday": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$de54CDNOm2eD$+IyZZkBDiAAaxzqSwqXgPl6pys6msNroZ+vGIh+Esew=",
+      "last_login": "2020-12-19T12:52:59.085Z",
+      "is_superuser": false,
+      "username": "adminroot119633",
+      "first_name": "\u0412\u0438\u043a\u0442\u043e\u0440",
+      "last_name": "\u0411\u0430\u0440\u0445\u043e\u0442\u043e\u0432",
+      "email": "shakirov.vitaliy@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-19T12:52:52.491Z",
+      "avatar": "",
+      "age": 25,
+      "birthday": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
