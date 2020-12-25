@@ -5,11 +5,16 @@ app_name = 'adminapp'
 
 urlpatterns = [
     path('', adminapp_views.index, name='index'),
-    path('users/', adminapp_views.admin_users, name='admin_users'),
-    path('users/create/', adminapp_views.admin_users_create, name='admin_users_create'),
-    path('users/update/<int:user_id>/', adminapp_views.admin_users_update, name='admin_users_update'),
-    path('users/remove/<int:user_id>/', adminapp_views.admin_users_remove, name='admin_users_remove'),
-    path('users/active/<int:user_id>/', adminapp_views.admin_users_active, name='admin_users_active'),
+    path('users/', adminapp_views.AdminUsers.as_view(), name='admin_users'),
+    #path('users/', adminapp_views.admin_users, name='admin_users'),
+    path('users/create/', adminapp_views.AdminUsersCreate.as_view(), name='admin_users_create'),
+    #path('users/create/', adminapp_views.admin_users_create, name='admin_users_create'),
+    path('users/update/<int:pk>/', adminapp_views.AdminUsersUpdate.as_view(), name='admin_users_update'),
+    #path('users/update/<int:user_id>/', adminapp_views.admin_users_update, name='admin_users_update'),
+    path('users/remove/<int:pk>/', adminapp_views.AdminUsersRemove.as_view(), name='admin_users_remove'),
+    #path('users/remove/<int:user_id>/', adminapp_views.admin_users_remove, name='admin_users_remove'),
+    path('users/active/<int:pk>/', adminapp_views.AdminUsersActive.as_view(), name='admin_users_active'),
+    #path('users/active/<int:user_id>/', adminapp_views.admin_users_active, name='admin_users_active'),
 
     path('categories/', adminapp_views.categories_item, name='categories'),
     path('categories/create/', adminapp_views.categories_item_create, name='categories_item_create'),

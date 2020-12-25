@@ -10,7 +10,7 @@
         </div>
     {% endif %}
     <h1 class="mt-4">Создание продукта</h1>
-    <form action="{% url 'admin_staff:products_item_create' %}" method="POST">
+    <form action="{% url 'admin_staff:products_item_create' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_table }}
         <div class="form-row">

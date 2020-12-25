@@ -2,6 +2,15 @@ from os import path
 from hashlib import sha256
 from datetime import date
 import datetime as dt
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
+
+def change_state(request, obj, item, state, message):
+    obj_item = get_object_or_404(obj, pk=item)
+    obj_item.is_active = state
+    obj_item.save()
+    messages.success(request, message)
 
 
 def calculate_age(birthday):

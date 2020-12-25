@@ -1,11 +1,14 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from authapp.models import ShopUser
 from adminapp.forms import UserAdminRegisterForm, UserAdminEditForm, ProductCategoryEditForm, ProductsEditForm
-from django.urls import reverse
-from utilities.files import calculate_age
+from django.urls import reverse, reverse_lazy
+from utilities.files import calculate_age, change_state
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
 from mainapp.models import Product, ProductCategory
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -23,79 +26,137 @@ def index(request):
     return render(request, 'adminapp/index.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users(request):
-    context = {
-        'users': ShopUser.objects.all(),
-    }
-    return render(request, 'adminapp/admin-users-read.html', context)
+# CBV
+class AdminUsers(ListView):
+    model = ShopUser
+    template_name = 'adminapp/admin-users-read.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(AdminUsers, self).dispatch(request, *args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_create(request):
-    if request.method == 'POST':
-        form = UserAdminRegisterForm(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Пользователь успешно создан!')
-            return HttpResponseRedirect(reverse('admin_staff:admin_users'))
-        else:
-            messages.warning(request, form.errors)
-    else:
-        form = UserAdminRegisterForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'adminapp/admin-users-create.html', context)
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users(request):
+#     context = {
+#         'users': ShopUser.objects.all(),
+#     }
+#     return render(request, 'adminapp/admin-users-read.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_update(request, user_id):
-    user = ShopUser.objects.get(id=user_id)
-    title = 'редактирование'
-    if request.method == 'POST':
-        # Подсчитываем возраст автоматически на основании даты рождения
-        try:
-            _mutable = request.POST._mutable
-            request.POST._mutable = True
-            request.POST['age'] = calculate_age(request.POST['birthday'])
-            request.POST._mutable = _mutable
-        except:
-            messages.warning(request, 'Не указана дата рождения! Возраст не определен, и оставлен без изменения!')
+# CBV
+class AdminUsersCreate(CreateView):
+    model = ShopUser
+    template_name = 'adminapp/admin-users-create.html'
+    success_url = reverse_lazy('admin_staff:admin_users')
+    form_class = UserAdminRegisterForm
 
-        edit_form = UserAdminEditForm(request.POST, request.FILES, instance=user)
-        if edit_form.is_valid():
-            edit_form.save()
-            messages.success(request, 'Изменения успешно сохранены!')
-            return HttpResponseRedirect(reverse('admin_staff:admin_users'))
-        else:
-            messages.warning(request, 'Вы слишком молоды!')
-    else:
-        edit_form = UserAdminEditForm(instance=user)
-    context = {
-        'title': title,
-        'form': edit_form,
-        'user': user,
-    }
-    return render(request, 'adminapp/admin-users-update-delete.html', context)
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(AdminUsersCreate, self).dispatch(request, *args, **kwargs)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_remove(request, user_id):
-    user = ShopUser.objects.get(id=user_id)
-    user.is_active = False
-    user.save()
-    messages.success(request, 'Пользователь успешно деактивирован!')
-    return HttpResponseRedirect(reverse('admin_staff:admin_users'))
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_create(request):
+#     if request.method == 'POST':
+#         form = UserAdminRegisterForm(data=request.POST, files=request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Пользователь успешно создан!')
+#             return HttpResponseRedirect(reverse('admin_staff:admin_users'))
+#         else:
+#             messages.warning(request, form.errors)
+#     else:
+#         form = UserAdminRegisterForm()
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'adminapp/admin-users-create.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_active(request, user_id):
-    user = ShopUser.objects.get(id=user_id)
-    user.is_active = True
-    user.save()
-    messages.success(request, 'Пользователь успешно активирован!')
-    return HttpResponseRedirect(reverse('admin_staff:admin_users'))
+# CBV
+class AdminUsersUpdate(UpdateView):
+    model = ShopUser
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('admin_staff:admin_users')
+    form_class = UserAdminEditForm
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(AdminUsersUpdate, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdminUsersUpdate, self).get_context_data(**kwargs)
+        context['title'] = title = 'редактирование'
+        return context
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_update(request, user_id):
+#     user = get_object_or_404(ShopUser, id=user_id)
+#     title = 'редактирование'
+#     if request.method == 'POST':
+#         # Подсчитываем возраст автоматически на основании даты рождения
+#         try:
+#             _mutable = request.POST._mutable
+#             request.POST._mutable = True
+#             request.POST['age'] = calculate_age(request.POST['birthday'])
+#             request.POST._mutable = _mutable
+#         except:
+#             messages.warning(request, 'Не указана дата рождения! Возраст не определен, и оставлен без изменения!')
+#
+#         edit_form = UserAdminEditForm(request.POST, request.FILES, instance=user)
+#         if edit_form.is_valid():
+#             edit_form.save()
+#             messages.success(request, 'Изменения успешно сохранены!')
+#             return HttpResponseRedirect(reverse('admin_staff:admin_users'))
+#         else:
+#             messages.warning(request, 'Вы слишком молоды!')
+#     else:
+#         edit_form = UserAdminEditForm(instance=user)
+#     context = {
+#         'title': title,
+#         'form': edit_form,
+#         'user': user,
+#     }
+#     return render(request, 'adminapp/admin-users-update-delete.html', context)
+
+
+# CBV
+class AdminUsersRemove(DeleteView):
+    model = ShopUser
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('admin_staff:admin_users')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_remove(request, user_id):
+#     change_state(request, ShopUser, user_id, False, 'Пользователь успешно деактивирован!')
+#     return HttpResponseRedirect(reverse('admin_staff:admin_users'))
+
+# CBV
+class AdminUsersActive(DeleteView):
+    model = ShopUser
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('admin_staff:admin_users')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = True
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_active(request, user_id):
+#     change_state(request, ShopUser, user_id, True, 'Пользователь успешно активирован!')
+#     return HttpResponseRedirect(reverse('admin_staff:admin_users'))
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -126,7 +187,7 @@ def categories_item_create(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def categories_item_update(request, category_pk):
-    category = ProductCategory.objects.get(pk=category_pk)
+    category = get_object_or_404(ProductCategory, pk=category_pk)
     if request.method == 'POST':
         form = ProductCategoryEditForm(data=request.POST, instance=category)
         if form.is_valid():
@@ -146,19 +207,13 @@ def categories_item_update(request, category_pk):
 
 @user_passes_test(lambda u: u.is_superuser)
 def categories_item_remove(request, category_pk):
-    category = ProductCategory.objects.get(pk=category_pk)
-    category.is_active = False
-    category.save()
-    messages.success(request, 'Категория успешно деактивированна!')
+    change_state(request, ProductCategory, category_pk, False, 'Категория успешно деактивированна!')
     return HttpResponseRedirect(reverse('admin_staff:categories'))
 
 
 @user_passes_test(lambda u: u.is_superuser)
 def categories_item_active(request, category_pk):
-    category = ProductCategory.objects.get(pk=category_pk)
-    category.is_active = True
-    category.save()
-    messages.success(request, 'Категория успешно активированна!')
+    change_state(request, ProductCategory, category_pk, True, 'Категория успешно активированна!')
     return HttpResponseRedirect(reverse('admin_staff:categories'))
 
 
@@ -173,7 +228,7 @@ def products_item(request):
 @user_passes_test(lambda u: u.is_superuser)
 def products_item_create(request):
     if request.method == 'POST':
-        form = ProductsEditForm(data=request.POST)
+        form = ProductsEditForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Продукт успешно создан!')
@@ -190,9 +245,9 @@ def products_item_create(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def products_item_update(request, product_pk):
-    product = Product.objects.get(pk=product_pk)
+    product = get_object_or_404(Product, pk=product_pk)
     if request.method == 'POST':
-        form = ProductsEditForm(data=request.POST, instance=product)
+        form = ProductsEditForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             messages.success(request, 'Продукт успешно изменен!')
@@ -210,17 +265,11 @@ def products_item_update(request, product_pk):
 
 @user_passes_test(lambda u: u.is_superuser)
 def products_item_remove(request, product_pk):
-    product = ProductCategory.objects.get(pk=product_pk)
-    product.is_active = False
-    product.save()
-    messages.success(request, 'Продукт успешно деактивирован!')
+    change_state(request, Product, product_pk, False, 'Продукт успешно деактивирован!')
     return HttpResponseRedirect(reverse('admin_staff:products'))
 
 
 @user_passes_test(lambda u: u.is_superuser)
 def products_item_active(request, product_pk):
-    product = Product.objects.get(pk=product_pk)
-    product.is_active = True
-    product.save()
-    messages.success(request, 'Продукт успешно активирован!')
+    change_state(request, Product, product_pk, True, 'Продукт успешно активирован!')
     return HttpResponseRedirect(reverse('admin_staff:products'))

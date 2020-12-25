@@ -33,7 +33,7 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    {% for elem in users %}
+                    {% for elem in object_list %}
                         <tr {% if not elem.is_active %} class="text-muted" {% endif %}>
                             <td><a href="{% url 'admin_staff:admin_users_update' elem.id %}"
                                    style="color: dodgerblue">{{ elem.username }}</a></td>
