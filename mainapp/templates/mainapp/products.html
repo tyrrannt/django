@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load staticfiles %}
+{% load custom %}
 
 {% block css %}
     <title>{{ title | title }}</title>
@@ -25,7 +26,7 @@
                             <div class="card h-100">
                                 <a href="
                                         {% if not category_pk %}{{ product.category.uid }}/{% endif %}{% if not product.paginator.num_pages %}1/{% endif %}{{ product.pk }}">
-                                    <img class="card-img-top" src="/media/{{ product.image }}"
+                                    <img class="card-img-top" src="{{ product.image|media_folder_products }}"
                                          alt="">
                                 </a>
                                 <div class="card-body">
