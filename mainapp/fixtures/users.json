@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$150000$2cekHcuy9NAg$zVHceAgCbSUjBHpkyVvOHQrPlWpPjIGSv8yByedoJGk=",
-      "last_login": "2020-12-23T11:21:49.478Z",
+      "last_login": "2020-12-25T17:10:10.007Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "\u0412\u0438\u0442\u0430\u043b\u0438\u0439",
@@ -78,6 +78,69 @@
       "date_joined": "2020-12-19T12:52:52.491Z",
       "avatar": "",
       "age": 25,
+      "birthday": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$k2gl2JUPmnGc$7eto5nObG0Pt9xyz8XKI/24GNFa7vHTVDGk0o24WyLw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "galina",
+      "first_name": "\u0413\u0430\u043b\u0438\u043d\u0430",
+      "last_name": "\u041a\u0440\u0430\u0441\u0438\u043b\u044c\u043d\u0438\u043a\u043e\u0432\u0430",
+      "email": "galya-149@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-24T10:39:04.595Z",
+      "avatar": "users_avatars/16205827-1_NyLiAPa.jpg",
+      "age": 30,
+      "birthday": "1990-01-01",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$wEuvu0FxkEyG$ly7oB7jzTs/kYWphTyIN9RlCLvfKVtyL3Y1fXMmWkxM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "galina2",
+      "first_name": "\u0413\u0430\u043b\u0438\u043d\u0430",
+      "last_name": "\u041a\u0440\u0430\u0441\u0438\u043b\u044c\u043d\u0438\u043a\u043e\u0432\u0430",
+      "email": "galya-149@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-24T12:51:39.324Z",
+      "avatar": "users_avatars/16205827-1_Z8rbc76.jpg",
+      "age": 19,
+      "birthday": "2001-09-22",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$8paoAEAXdRnx$A7lmT6K/9w3R1xze39kyTdHfc7BAGb8AbrM5H9yopgE=",
+      "last_login": "2020-12-25T17:07:25.473Z",
+      "is_superuser": false,
+      "username": "mylist",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-25T15:12:54.883Z",
+      "avatar": "users_avatars/16205827-1_u7qjktQ.jpg",
+      "age": null,
       "birthday": null,
       "groups": [],
       "user_permissions": []

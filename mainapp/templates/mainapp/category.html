@@ -6,8 +6,8 @@
             {% for category in categories %}
                 {% if category.is_active %}
                     <b><a href="{% url 'products:category' category.pk %}"
-                                  class="list-group-item bg-light">{{ category.name }}
-                       </a>
+                          class="list-group-item bg-light">{{ category.name }}
+                    </a>
                     </b>
                 {% endif %}
             {% endfor %}
