@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from mainapp.models import Product
 
+
 class Basket(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='basket')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -9,6 +10,10 @@ class Basket(models.Model):
     add_datetime = models.DateTimeField(verbose_name='время', auto_now_add=True)
 
     def __str__(self):
+        """
+        Переопределение стандартного метода str
+        :return: Возвращает заданное пользователем представление экземпляра класса
+        """
         return f'{self.user} - {self.product}'
 
     def sum(self):

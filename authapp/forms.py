@@ -18,20 +18,24 @@ class ShopUserLoginForm(AuthenticationForm):
 
 class ShopUserEditForm(UserChangeForm):
     avatar = forms.ImageField(widget=forms.FileInput)
+
     class Meta:
         model = ShopUser
         fields = ('username', 'first_name', 'last_name', 'email', 'age', 'birthday', 'password', 'avatar')
+        widgets = {
+            'birthday': forms.DateInput(attrs={'type': 'date'})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
+        self.fields['birthday'].widget.attrs['type'] = 'date'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
             field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
-
 
     def clean_age(self):
         data = self.cleaned_data['age']
