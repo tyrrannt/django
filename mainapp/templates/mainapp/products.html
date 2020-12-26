@@ -11,28 +11,21 @@
 {% block contents %}
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             {% include 'mainapp/category.html' %}
-
             <div class="col-lg-9">
-
                 {% include 'mainapp/carousel.html' %}
-
                 <div class="row">
                     {% for product in products %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
-                                <a href="
-                                        {% if not category_pk %}{{ product.category.uid }}/{% endif %}{% if not product.paginator.num_pages %}1/{% endif %}{{ product.pk }}">
+                                <a href="{% url 'products:product' product.pk %}">
                                     <img class="card-img-top" src="{{ product.image|media_folder_products }}"
                                          alt="">
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="
-                                                {% if not category_pk %}{{ product.category.uid }}/{% endif %}{% if not product.paginator.num_pages %}1/{% endif %}{{ product.pk }}">{{ product.name }}</a>
+                                        <a href="{% url 'products:product' product.pk %}">{{ product.name }}</a>
                                     </h4>
                                     <h5>{{ product.price }} руб.</h5>
                                     <p class="card-text">{{ product.short_desc }}</p>
@@ -60,28 +53,27 @@
                             </div>
                         </div>
                     {% endfor %}
-
                 </div>
                 <!-- /.row -->
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
                             <a class="page-link"
-                               href="{% if products.has_previous %} {% url 'products:page' category_pk products.previous_page_number %} {% else %} # {% endif %}">
+                               href="{% if products.has_previous %} {% url 'products:page' category.pk products.previous_page_number %} {% else %} # {% endif %}">
                                 Previous
                             </a>
                         </li>
                         {% for page in products.paginator.page_range %}
                             <li class="page-item">
                                 <a class="page-link"
-                                   href="{% url 'products:page' category_pk page %}">
+                                   href="{% url 'products:page' category.pk page %}">
                                     {{ page }}
                                 </a>
                             </li>
                         {% endfor %}
                         <li class="page-item {% if not products.has_next %} disabled {% endif %}">
                             <a class="page-link"
-                               href="{% if products.has_next %} {% url 'products:page' category_pk products.next_page_number %} {% else %} # {% endif %}">
+                               href="{% if products.has_next %} {% url 'products:page' category.pk products.next_page_number %} {% else %} # {% endif %}">
                                 Next
                             </a>
                         </li>

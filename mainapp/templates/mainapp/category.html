@@ -5,25 +5,10 @@
         <div class="list-group">
             {% for category in categories %}
                 {% if category.is_active %}
-                    {% if category.uid is 7 %}
-                        {% if user.is_active and user.age > 20 %}
-                            {% if category.uid == pk %}
-                                <b><a href="{% url 'products:index' %}{{ category.uid }}"
-                                      class="list-group-item bg-light">{{ category.name }}</a></b>
-                            {% else %}
-                                <a href="{% url 'products:index' %}{{ category.uid }}"
-                                   class="list-group-item">{{ category.name }}</a>
-                            {% endif %}
-                        {% endif %}
-                    {% else %}
-                        {% if category.uid == pk %}
-                            <b><a href="{% url 'products:index' %}{{ category.uid }}"
-                                  class="list-group-item bg-light">{{ category.name }}</a></b>
-                        {% else %}
-                            <a href="{% url 'products:index' %}{{ category.uid }}"
-                               class="list-group-item">{{ category.name }}</a>
-                        {% endif %}
-                    {% endif %}
+                    <b><a href="{% url 'products:category' category.pk %}"
+                                  class="list-group-item bg-light">{{ category.name }}
+                       </a>
+                    </b>
                 {% endif %}
             {% endfor %}
         </div>
