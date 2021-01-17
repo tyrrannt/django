@@ -40,3 +40,8 @@ manage.py dumpdata mainapp.ProductCategory > mainapp\fixtures\category.json
 manage.py dumpdata mainapp.Product > mainapp\fixtures\product.json
 manage.py dumpdata basketapp.Basket > mainapp\fixtures\basket.json
 ```
+
+### Запуск встроенного в Python «Debugging» сервера 
+```
+python -m smtpd -n -c DebuggingServer localhost:25
+```

@@ -1,9 +1,13 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import ShopUserLoginForm
 from authapp.forms import ShopUserRegisterForm
 from authapp.forms import ShopUserEditForm
 from django.contrib import auth, messages
 from django.urls import reverse
+
+from authapp.models import ShopUser
 from basketapp.models import Basket
 from django.contrib.auth.decorators import login_required
 from utilities.files import calculate_age
@@ -36,9 +40,14 @@ def register(request):
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
             messages.success(request, 'Вы успешно зарегистрировались!')
-            return HttpResponseRedirect(reverse('authapp:login'))
+            if send_verify_mail(user):
+                print('сообщение подтверждения отправлено')
+                return HttpResponseRedirect(reverse('auth:login'))
+            else:
+                print('ошибка отправки сообщения')
+                return HttpResponseRedirect(reverse('auth:login'))
     else:
         register_form = ShopUserRegisterForm()
     content = {'title': title, 'register_form': register_form}
@@ -75,3 +84,31 @@ def edit(request):
         'total_sum': sum(basket.sum() for basket in baskets),
     }
     return render(request, 'authapp/profile.html', content)
+
+
+def send_verify_mail(user):
+    verify_link = reverse('authapp:verify', args=[user.email, user.activate_key])
+
+    title = f'Подтверждение учетной записи {user.username}'
+
+    message = f'Для подтверждения учетной записи {user.username} на портале {settings.DOMAIN_NAME} перейдите по ' \
+              f'ссылке: \n{settings.DOMAIN_NAME}{verify_link} '
+
+    return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+
+
+def verify(request, email, activate_key):
+    try:
+        user = ShopUser.objects.get(email=email)
+        if user.activate_key == activate_key and not user.is_activate_key_expired():
+            user.is_active = True
+            user.activate_key = None
+            user.save()
+            auth.login(request, user)
+            return render(request, 'authapp/verification.html')
+        else:
+            print(f'error activation user: {user}')
+            return render(request, 'authapp/verification.html')
+    except Exception as e:
+        print(f'error activation user : {e.args}')
+        return HttpResponseRedirect(reverse('index'))

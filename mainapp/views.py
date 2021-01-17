@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from mainapp.models import ProductCategory, Product
-from basketapp.models import Basket
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -12,16 +11,10 @@ def main(request):
 
 
 def product_item(request, pk=None):
-    basket = []
-    print(pk)
-
     title = 'GeekShop - Каталог'
     categories = ProductCategory.objects.all()
     product = Product.objects.get(pk=pk)
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
     context = {
-        'baskets': basket,
         'categories': categories,
         'title': title,
         'product': product,
@@ -30,11 +23,8 @@ def product_item(request, pk=None):
 
 
 def products(request, pk=None, page=1):
-    basket = []
     title = 'GeekShop - Каталог'
     categories = ProductCategory.objects.filter(is_active=True)
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
     if pk is not None:
         if pk == 0:
             products = Product.objects.all().order_by('price')
@@ -47,7 +37,6 @@ def products(request, pk=None, page=1):
             'title': title,
             'categories': categories,
             'products': products,
-            'baskets': basket,
             'category': category,
         }
         paginator = Paginator(products, 3)
@@ -68,7 +57,6 @@ def products(request, pk=None, page=1):
         'title': title,
         'categories': categories,
         'products': products,
-        'baskets': basket,
         'category': category,
     }
     paginator = Paginator(products, 3)
