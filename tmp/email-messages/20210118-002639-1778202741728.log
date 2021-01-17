@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IEdlZWtCcmFpbnM=?=
+From: django@geekshop.local
+To: 123@123.ru
+Date: Sun, 17 Jan 2021 21:26:39 -0000
+Message-ID: <161091879988.6304.17584342110285076106@DESKTOP-RT2GE28>
+
+Для подтверждения учетной записи GeekBrains на портале http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/123@123.ru/4d50c5d899526d4fc21d0d6631629b3126698518/ 
+-------------------------------------------------------------------------------
