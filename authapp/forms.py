@@ -74,4 +74,3 @@ class ShopUserRegisterForm(UserCreationForm):
         user.save()
 
         return user
-

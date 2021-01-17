@@ -14,9 +14,9 @@
                 <li class="nav-item">
                     <!--<a class="nav-link" href="{% url 'products:index' %}"><i class="fas fa-shopping-bag"></i></a>-->
                     <a href="{% url 'basket:view' %}" class="basket nav-link">
-                        <span>
-                            {% if baskets %} {{ baskets|length }} {% endif %}
-                        </span>
+                        {% if baskets %}
+                            <span style="border: #adff66 1px; border-style: outset">&nbsp;Количество: {{ baskets|length }} шт. / Сумма: {{ total_sum }} руб.&nbsp;</span>&nbsp;
+                        {% endif %}
                         <i class="fas fa-shopping-bag"></i>
                     </a>
                 </li>

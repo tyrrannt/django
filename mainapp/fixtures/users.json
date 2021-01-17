@@ -1,1 +1,48 @@
-[{"model": "authapp.shopuser", "pk": 1, "fields": {"password": "pbkdf2_sha256$150000$2cekHcuy9NAg$zVHceAgCbSUjBHpkyVvOHQrPlWpPjIGSv8yByedoJGk=", "last_login": "2021-01-17T21:42:59.905Z", "is_superuser": true, "username": "admin", "first_name": "\u0412\u0438\u0442\u0430\u043b\u0438\u0439", "last_name": "\u0428\u0430\u043a\u0438\u0440\u043e\u0432", "email": "shakirov.vitaliy@gmail.com", "is_staff": true, "is_active": true, "date_joined": "2020-12-10T13:18:31Z", "avatar": "users_avatars/admin.jpg", "age": 38, "birthday": "1981-12-30", "activate_key": "", "activate_key_expires": "2021-01-19T19:18:57.421Z", "groups": [], "user_permissions": []}}, {"model": "authapp.shopuser", "pk": 20, "fields": {"password": "pbkdf2_sha256$150000$vtzh6Aa3VhpM$GIUOsbXnC6B7YSWQb91qJs8+KxeyQsX+boB8SJsdmT4=", "last_login": "2021-01-17T21:26:58.643Z", "is_superuser": false, "username": "GeekBrains", "first_name": "GeekBrains", "last_name": "GeekBrains", "email": "123@123.ru", "is_staff": false, "is_active": true, "date_joined": "2021-01-17T21:26:39.732Z", "avatar": "", "age": 34, "birthday": null, "activate_key": null, "activate_key_expires": "2021-01-19T21:15:31.747Z", "groups": [], "user_permissions": []}}]
+[
+  {
+    "model": "authapp.shopuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$2cekHcuy9NAg$zVHceAgCbSUjBHpkyVvOHQrPlWpPjIGSv8yByedoJGk=",
+      "last_login": "2021-01-17T21:42:59.905Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "\u0412\u0438\u0442\u0430\u043b\u0438\u0439",
+      "last_name": "\u0428\u0430\u043a\u0438\u0440\u043e\u0432",
+      "email": "shakirov.vitaliy@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-12-10T13:18:31Z",
+      "avatar": "users_avatars/admin.jpg",
+      "age": 38,
+      "birthday": "1981-12-30",
+      "activate_key": "",
+      "activate_key_expires": "2021-01-19T19:18:57.421Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.shopuser",
+    "pk": 20,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$vtzh6Aa3VhpM$GIUOsbXnC6B7YSWQb91qJs8+KxeyQsX+boB8SJsdmT4=",
+      "last_login": "2021-01-17T21:26:58.643Z",
+      "is_superuser": false,
+      "username": "GeekBrains",
+      "first_name": "GeekBrains",
+      "last_name": "GeekBrains",
+      "email": "123@123.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-01-17T21:26:39.732Z",
+      "avatar": "",
+      "age": 34,
+      "birthday": null,
+      "activate_key": null,
+      "activate_key_expires": "2021-01-19T21:15:31.747Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

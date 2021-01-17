@@ -145,9 +145,8 @@ EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'django@geekshop.local'
 EMAIL_HOST_PASSWORD = 'geekshop'
 EMAIL_USE_SSL = False
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'tmp/email-messages/')
-
