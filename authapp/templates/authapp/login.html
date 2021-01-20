@@ -44,9 +44,13 @@
                         </div>
                     </form>
                     <hr>
+                    <button class="btn btn-block btn-outline-secondary form-control">
+                        <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                            Вход через ВКонтакте
+                        </a>
+                    </button>
                     <button type="button" class="btn btn-block btn-outline-secondary"><a
-                            href="{% url 'auth:register' %}">
-                        Нужен аккаунт? Зарегистрируйся!</a>
+                            href="{% url 'auth:register' %}">Нужен аккаунт? Зарегистрируйся!</a>
                     </button>
                     <hr>
                     <button type="button" class="btn btn-block btn-outline-secondary"><a
