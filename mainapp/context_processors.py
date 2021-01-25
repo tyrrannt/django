@@ -7,5 +7,6 @@ def basket(request):
     if request.user.is_authenticated:
         basket_items = Basket.objects.filter(user=request.user)
     return {
-        'baskets': basket_items
+        'baskets': basket_items,
+        'total_sum': sum(basket.sum() for basket in basket_items),
     }
