@@ -4169,6 +4169,7 @@ input[type=button].btn-block {
 }
 
 .nav-link {
+    color: #6c757d;
     display: block;
     padding: 0.5rem 1rem;
 }
@@ -4178,7 +4179,7 @@ input[type=button].btn-block {
 }
 
 .nav-link.disabled {
-    color: #6c757d;
+
     pointer-events: none;
     cursor: default;
 }
@@ -4216,6 +4217,7 @@ input[type=button].btn-block {
 
 .nav-tabs .dropdown-menu {
     margin-top: -1px;
+    color: #000000;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -10814,15 +10816,15 @@ body {
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(127, 127, 127, 0.5);
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(127, 127, 127, 0.25);
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(127, 127, 127, 0.25);
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {

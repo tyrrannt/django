@@ -40,7 +40,7 @@
                 <h5 class="card-text float-right">{{ total_sum }} руб.</h5>
             </div>
             <div class="card">
-                <a href="#" class="float-left btn btn-lg btn-success">
+                <a href="{% url 'ordersapp:order_create' %}" class="float-left btn btn-lg btn-success">
                     Оформить заказ
                 </a>
                 <a href="{% url 'basketapp:remove_all' %}" class="float-right btn btn-warning btn-lg">
