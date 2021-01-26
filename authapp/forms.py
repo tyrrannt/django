@@ -32,7 +32,7 @@ class ShopUserEditForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
-        self.fields['email'].widget.attrs['readonly'] = True
+        #self.fields['email'].widget.attrs['readonly'] = True
         self.fields['birthday'].widget.attrs['type'] = 'date'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
