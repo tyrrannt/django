@@ -7,7 +7,7 @@
     <div class="basket_list">
         {% for item in object.orderitems.select_related %}
             <div class="basket_record">
-                <img src="{{ item.product.image|media_folder_products }}"
+                <img src="{{ item.product.image|media_folder_products }}" width="200px"
                      alt="{{ item.product.short_desc }}">
                 <span class="category_name">
                    {{ item.product.category.name }}
@@ -27,4 +27,9 @@
     </div>
     {% include 'ordersapp/includes/inc_order_actions.html' %}
 
+{% endblock %}
+
+{% block custom_scripts %}
+    <script src="{% static 'js/orders_script.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
 {% endblock %}
