@@ -2,14 +2,16 @@ from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DeleteView, UpdateView, DetailView, ListView
 
 from basketapp.models import Basket
+from mainapp.models import Product
 from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItem
 
@@ -83,7 +85,6 @@ class OrderItemsUpdate(UpdateView):
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
         data['orderitems'] = formset
-        print(formset)
         return data
 
     def form_valid(self, form):
@@ -141,3 +142,10 @@ def product_quantity_update_save(sender, update_fields, instance, **kwargs):
 def product_quantity_update_delete(sender, instance, **kwargs):
     instance.product.quantity += instance.quantity
     instance.product.save()
+
+
+def get_item_price(request, pk):
+    if request.is_ajax():
+        new_order_item = Product.objects.get(pk=int(pk))
+        content = [str(new_order_item.price)]
+        return JsonResponse({'result': content})
