@@ -22,6 +22,7 @@ class ShopUser(AbstractUser):
             return False
         return True
 
+
 class ShopUserProfile(models.Model):
     MALE = 'M'
     FEMALE = 'W'
@@ -44,4 +45,3 @@ class ShopUserProfile(models.Model):
     @receiver(post_save, sender=ShopUser)
     def save_user_profile(sender, instance, **kwargs):
         instance.shopuserprofile.save()
-

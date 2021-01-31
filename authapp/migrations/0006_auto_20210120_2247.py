@@ -8,7 +8,6 @@ from django.utils.timezone import utc
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('authapp', '0005_auto_20210118_2153'),
     ]
@@ -26,7 +25,8 @@ class Migration(migrations.Migration):
                 ('tagline', models.CharField(blank=True, max_length=256, verbose_name='тэги')),
                 ('about_me', models.CharField(blank=True, max_length=512, verbose_name='обо мне')),
                 ('gender', models.CharField(choices=[('M', 'М'), ('W', 'Ж')], max_length=1, verbose_name='пол')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                'user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
