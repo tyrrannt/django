@@ -166,7 +166,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-
 # Загружаем секреты из файла
 with open(os.path.join(BASE_DIR, 'geekshop/vk.json'), 'r') as f:
     VK = json.load(f)
