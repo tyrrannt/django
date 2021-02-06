@@ -82,6 +82,24 @@ window.onload = function () {
             },
         });
         event.preventDefault();
+        // orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-DELETE', ''));
+        // var orderitem_product_pk = target.options[target.selectedIndex].value;
+        // if (orderitem_product_pk){
+        //     $.ajax({
+        //         url: "/order/price/" + orderitem_product_pk + "/",
+        //         success: function (data) {
+        //             if (data.price){
+        //                 price_arr[orderitem_num] = parseFloat(data.price);
+        //                 if (isNaN(quantity_arr[orderitem_num])){
+        //                     quantity_arr[orderitem_num] = 0;
+        //                 }
+        //                 var price_html = `<span>` + data.price.toString().replace('.', ',') + `</span> руб.`;
+        //                 var current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+        //                 current_tr.find('td:eq(2)').html(price_html);
+        //             }
+        //         }
+        //     })
+        // }
     });
 
 }

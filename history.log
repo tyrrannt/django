@@ -1,0 +1,122 @@
+    1  ls
+    2  sudo apt install mc
+    3  sudo ssh-keygen 
+    4  sudo cat /root/.ssh/id_rsa.pub
+    5  sudo apt install nginx
+    6  sudo apt install postgresql postgresql-contrib 
+    7  sudo apt install git-core
+    8  sudo apt install python-venv
+    9  sudo apt install python3-venv
+   10  sudo nano /etc/postgresql/12/main/pg_hba.conf 
+   11  sudo systemctl restart postgresql
+   12  sudo useradd -g www-data -m django
+   13  cd /home/django/
+   14  ls
+   15  sudo git clone git@github.com:tyrrannt/django.git
+   16  ls
+   17  cd django/
+   18  python3 -m venv env
+   19  sudo python3 -m venv env
+   20  ls
+   21  source env/bin/activate
+   22  pip3 install -r requirements.txt 
+   23  sudo nano requirements.txt 
+   24  pip3 install -r requirements.txt 
+   25  ls
+   26  sudo chmod +x manage.py 
+   27  pip3 install gunicorn
+   28  sudo pip3 install gunicorn
+   29  su
+   30  sudo passwd su
+   31  sudo passwd root
+   32  su
+   33  history 
+   34  history > ~/history1.log
+   35  su 
+   36  sudo apt install python3-pip
+   37  sudo source env/bin/activate
+   38  ls
+   39  su
+   40  history 
+   41  history >history.log 
+
+под пользователем root
+    1  history > /home/shakirov/history1.log 
+    2  nano /home/shakirov/history1.log 
+    3  history
+    4  su shakirov
+    5  source env/bin/activate
+    6  pip3 install gunicorn
+    7  pip3 install -r requirements.txt 
+    8  pip3 install idna
+    9  pip3 install requests
+   10  pip3 install astroid
+   11  nano geekshop/settings.py 
+   12  psql
+   13  psql -U postgres
+   14  python3 manage.py migrate
+   15  nano geekshop/settings.py 
+   16  python3 manage.py migrate
+   17  mc
+   18  python3 manage.py migrate
+   19  clear
+   20  python3 manage.py migrate
+   21  clear
+   22  python3 manage.py migrate
+   23  clear
+   24  passwd postgres
+   25  nano geekshop/settings.py 
+   26  python3 manage.py migrate
+   27  clear
+   28  psql -U postgres
+   29  python3 manage.py migrate
+   30  python3 manage.py fill_db
+   31  manage.py loaddata mainapp\fixtures\users.json
+   32  python3 manage.py loaddata mainapp\fixtures\users.json
+   33  python3 manage.py loaddata mainapp/fixtures/users.json
+   34  python3 manage.py loaddata mainapp/fixtures/category.json 
+   35  python3 manage.py loaddata mainapp/fixtures/product.json 
+   36  python3 manage.py loaddata mainapp/fixtures/basket.json 
+   37  python3 manage.py runserver
+   38  nano /etc/systemd/system/gunicorn.service
+   39  systemctl enable gunicorn
+   40  systemctl start gunicorn
+   41  systemctl status gunicorn
+   42  chown -R django /home/django/django/
+   43  chmod -R 755 /home/django/django/
+   44  systemctl restart gunicorn
+   45  systemctl status gunicorn
+   46  nano /etc/nginx/sites-available/django
+   47  systemctl restart nginx
+   48  systemctl status nginx
+   49  ln -s /etc/nginx/sites-available/django 
+   50  ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/
+   51  mc
+   52  nginx -t
+   53  systemctl restart nginx
+   54  systemctl status nginx
+   55  nano geekshop/settings.py 
+   56  systemctl restart gunicorn
+   57  systemctl status nginx
+   58  systemctl restart nginx
+   59  nano geekshop/settings.py 
+   60  systemctl restart gunicorn
+   61  systemctl restart nginx
+   62  nano geekshop/settings.py 
+   63  mc
+   64  python3 manage.py collectstatic
+   65  nano geekshop/settings.py 
+   66  python3 manage.py collectstatic
+   67  nano geekshop/settings.py 
+   68  python3 manage.py collectstatic
+   69  nano geekshop/settings.py 
+   70  python3 manage.py collectstatic
+   71  yes
+   72  nano geekshop/settings.py 
+   73  systemctl restart gunicorn
+   74  systemctl restart nginx
+   75  su shakirov
+   76  pip3 install gunicorn
+   77  su shakirov
+   78  history 
+   79  history > /home/shakirov/history1.log 
