@@ -38,8 +38,8 @@ class Product(models.Model):
         Переопределение стандартного метода str
         :return: Возвращает заданное пользователем представление экземпляра класса
         """
-        return f'{self.name} ({self.category.name})'
+        return f'{self.name}'
 
-    # @staticmethod
-    # def get_items():
-    #     return Product.objects.filter(is_active=True).order_by('category', 'name')
+    @staticmethod
+    def get_items():
+        return Product.objects.filter(is_active=True).order_by('category', 'name')

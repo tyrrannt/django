@@ -35,6 +35,9 @@ class Basket(models.Model):
     def getitem(pk):
         return Basket.objects.filter(pk=pk).first()
 
+    @staticmethod
+    def get_items(user):
+        return Basket.objects.filter(user=user).select_related()
     # Решение изменением моделей
     # def delete(self):
     #     self.product.quantity += self.quantity

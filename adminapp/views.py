@@ -162,7 +162,7 @@ class AdminUsersActive(DeleteView):
 @user_passes_test(lambda u: u.is_superuser)
 def categories_item(request):
     context = {
-        'categories': ProductCategory.objects.all()
+        'categories': ProductCategory.objects.all().select_related()
     }
     return render(request, 'adminapp/categories-items-read.html', context)
 
@@ -220,7 +220,7 @@ def categories_item_active(request, category_pk):
 @user_passes_test(lambda u: u.is_superuser)
 def products_item(request):
     context = {
-        'products': Product.objects.all()
+        'products': Product.objects.all().select_related()
     }
     return render(request, 'adminapp/products-items-read.html', context)
 

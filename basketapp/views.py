@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 def basket(request):
     title = 'Просмотр корзины'
     edit_form = ShopUserEditForm(instance=request.user)
-    baskets = Basket.objects.filter(user=request.user)
+    baskets = Basket.objects.filter(user=request.user).select_related()
     content = {
         'title': title,
         'edit_form': edit_form,

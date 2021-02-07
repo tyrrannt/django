@@ -40,20 +40,20 @@ class Order(models.Model):
         verbose_name = 'заказ'
         verbose_name_plural = 'заказы'
 
+    def _items(self):
+        return self.orderitems.select_related()
+
     def __str__(self):
-        return 'Текущий заказ: {}'.format(self.id)
+        return f'Текущий заказ: {self.id}'
 
     def get_total_quantity(self):
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity, items)))
-
-    def get_product_type_quantity(self):
-        items = self.orderitems.select_related()
-        return len(items)
+        return sum(list(map(lambda x: x.quantity, self._items())))
 
     def get_total_cost(self):
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+        return sum(list(map(lambda x: x.quantity * x.product.price, self._items())))
+
+    def get_product_type_quantity(self):
+        return len(self._items())
 
     # переопределяем метод, удаляющий объект
     def delete(self):
@@ -76,7 +76,7 @@ class OrderItem(models.Model):
         return self.product.price * self.quantity
 
     @staticmethod
-    def getitem(pk):
+    def get_item(pk):
         return OrderItem.objects.filter(pk=pk).first()
 
     # def delete(self):

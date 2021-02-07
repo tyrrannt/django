@@ -30,9 +30,9 @@ def products(request, pk=None, page=1):
             products = Product.objects.all().order_by('price')
             category = {'pk': 0}
         else:
-            products = Product.objects.filter(category=ProductCategory.objects.get(pk=pk)).order_by('price')
-            category = get_object_or_404(ProductCategory, pk=pk)
-            title = 'GeekShop - ' + ProductCategory.objects.get(pk=pk).name
+            category = get_object_or_404(categories, pk=pk)
+            products = Product.objects.filter(category=category).order_by('price')
+            title = 'GeekShop - ' + category.name
         context = {
             'title': title,
             'categories': categories,

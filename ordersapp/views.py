@@ -35,7 +35,7 @@ class OrderItemsCreate(CreateView):
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
-            basket_items = Basket.objects.filter(user=self.request.user)
+            basket_items = Basket.objects.filter(user=self.request.user).select_related()
             if len(basket_items):
                 OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_items))
                 formset = OrderFormSet()
@@ -62,7 +62,7 @@ class OrderItemsCreate(CreateView):
                 orderitems.save()
 
         # удаляем пустой заказ
-        if self.object.get_total_cost() == 0:
+        if self.object.get_total_quantity() == 0:
             self.object.delete()
 
         return super(OrderItemsCreate, self).form_valid(form)
@@ -146,9 +146,8 @@ def product_quantity_update_delete(sender, instance, **kwargs):
 
 def get_item_price(request, pk):
     if request.is_ajax():
-        new_order_item = Product.objects.filter(pk=int(pk)).first
+        new_order_item = Product.objects.filter(pk=int(pk)).first()
         if new_order_item:
             content = [str(new_order_item.price)]
             return JsonResponse({'result': content})
-        else:
-            return JsonResponse({'result': 0})
+        return JsonResponse({'result': 0})
