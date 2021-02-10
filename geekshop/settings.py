@@ -24,7 +24,7 @@ SECRET_KEY = '7ec$wm0$ywb(1ka%pinzw+7p&9x5k$aq7)-b%r^m7yz15ne78z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '81.200.26.171',]
+ALLOWED_HOSTS = ['127.0.0.1', '81.200.26.171', ]
 
 # Application definition
 
@@ -102,6 +102,20 @@ DATABASES = {
         'PORT': '5432',
     },
 }
+
+if os.name == 'posix':
+    CACHE_MIDDLEWARE_ALIAS = 'default'
+    CACHE_MIDDLEWARE_SECONDS = 120
+    CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+
+LOW_CACHE = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
