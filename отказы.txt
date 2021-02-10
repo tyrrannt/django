@@ -1,0 +1,50 @@
+root@geekshop:/home/django/django# siege -f urls.txt -d0 -r50 -c20
+** SIEGE 4.0.4
+** Preparing 20 concurrent users for battle.
+The server is now under siege...
+Transactions:                  14000 hits
+Availability:                 100.00 %
+Elapsed time:                 105.30 secs
+Data transferred:            1672.65 MB
+Response time:                  0.15 secs
+Transaction rate:             132.95 trans/sec
+Throughput:                    15.88 MB/sec
+Concurrency:                   19.71
+Successful transactions:       14000
+Failed transactions:               0
+Longest transaction:            1.48
+Shortest transaction:           0.01
+
+ root@geekshop:/home/django/django# siege -f urls.txt -d0 -r50 -c40
+** SIEGE 4.0.4
+** Preparing 40 concurrent users for battle.
+The server is now under siege...
+Transactions:                  28000 hits
+Availability:                 100.00 %
+Elapsed time:                 254.47 secs
+Data transferred:            3345.30 MB
+Response time:                  0.36 secs
+Transaction rate:             110.03 trans/sec
+Throughput:                    13.15 MB/sec
+Concurrency:                   39.50
+Successful transactions:       28000
+Failed transactions:               0
+Longest transaction:            3.83
+Shortest transaction:           0.01
+
+ root@geekshop:/home/django/django# siege -f urls.txt -d0 -r50 -c40
+** SIEGE 4.0.4
+** Preparing 40 concurrent users for battle.
+The server is now under siege...
+Transactions:                  26000 hits
+Availability:                 100.00 %
+Elapsed time:                 550.41 secs
+Data transferred:            2628.34 MB
+Response time:                  0.84 secs
+Transaction rate:              47.24 trans/sec
+Throughput:                     4.78 MB/sec
+Concurrency:                   39.64
+Successful transactions:       26000
+Failed transactions:               0
+Longest transaction:           16.39
+Shortest transaction:           0.00

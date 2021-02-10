@@ -1,0 +1,76 @@
+root@geekshop:/home/django/django# siege -f urls.txt -d0 -r10 -c10
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Transactions:                   1300 hits
+Availability:                 100.00 %
+Elapsed time:                  31.15 secs
+Data transferred:             131.42 MB
+Response time:                  0.23 secs
+Transaction rate:              41.73 trans/sec
+Throughput:                     4.22 MB/sec
+Concurrency:                    9.57
+Successful transactions:        1300
+Failed transactions:               0
+Longest transaction:            5.40
+Shortest transaction:           0.00
+
+root@geekshop:/home/django/django# siege -f urls.txt -d0 -r50 -c10
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Transactions:                   6500 hits
+Availability:                 100.00 %
+Elapsed time:                 154.39 secs
+Data transferred:             657.09 MB
+Response time:                  0.23 secs
+Transaction rate:              42.10 trans/sec
+Throughput:                     4.26 MB/sec
+Concurrency:                    9.83
+Successful transactions:        6500
+Failed transactions:               0
+Longest transaction:            5.65
+Shortest transaction:           0.00
+
+
+http://81.200.26.171/auth/login/ POST username=admin&password=admin
+http://81.200.26.171/admin-staff/products/
+*********************************************************************************
+root@geekshop:/home/django/django# siege -f urls.txt -d0 -r10 -c10
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Transactions:                   1400 hits
+Availability:                 100.00 %
+Elapsed time:                  12.05 secs
+Data transferred:             167.37 MB
+Response time:                  0.08 secs
+Transaction rate:             116.18 trans/sec
+Throughput:                    13.89 MB/sec
+Concurrency:                    9.68
+Successful transactions:        1400
+Failed transactions:               0
+Longest transaction:            0.78
+Shortest transaction:           0.01
+
+root@geekshop:/home/django/django# siege -f urls.txt -d0 -r50 -c10
+** SIEGE 4.0.4
+** Preparing 10 concurrent users for battle.
+The server is now under siege...
+Transactions:                   7000 hits
+Availability:                 100.00 %
+Elapsed time:                  59.39 secs
+Data transferred:             836.32 MB
+Response time:                  0.08 secs
+Transaction rate:             117.86 trans/sec
+Throughput:                    14.08 MB/sec
+Concurrency:                    9.84
+Successful transactions:        7000
+Failed transactions:               0
+Longest transaction:            0.80
+Shortest transaction:           0.01
+
+http://81.200.26.171/products/category/1/
+http://81.200.26.171/products/category/2/
+http://81.200.26.171/products/category/3/
+*********************************************************************************

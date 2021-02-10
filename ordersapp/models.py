@@ -1,6 +1,8 @@
 from django.db import models
 
 from django.conf import settings
+from django.utils.functional import cached_property
+
 from mainapp.models import Product
 
 
@@ -39,6 +41,13 @@ class Order(models.Model):
         ordering = ('-created',)
         verbose_name = 'заказ'
         verbose_name_plural = 'заказы'
+
+    def get_summary(self):
+        items = self.orderitems.select_related()
+        return {
+            'total_cost': sum(list(map(lambda x: x.quantity * x.product.price, items))),
+            'total_quantity': sum(list(map(lambda x: x.quantity, items)))
+        }
 
     def _items(self):
         return self.orderitems.select_related()
