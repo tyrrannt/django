@@ -1,5 +1,5 @@
 import random
-
+from django.views.decorators.cache import cache_page
 from django.shortcuts import render, get_object_or_404
 from mainapp.models import ProductCategory, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -104,7 +104,7 @@ def product_item(request, pk=None):
     }
     return render(request, 'mainapp/product.html', context)
 
-
+@cache_page(3600)
 def products(request, pk=None, page=1):
     title = 'GeekShop - Каталог'
     # categories = ProductCategory.objects.filter(is_active=True)

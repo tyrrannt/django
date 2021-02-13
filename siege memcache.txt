@@ -1,0 +1,36 @@
+(env) root@geekshop:/home/django/django# nano geekshop/urls.txt
+(env) root@geekshop:/home/django/django# siege -i -f /home/django/django/geekshop/urls.txt -d0 -r17 -c125
+** SIEGE 4.0.4
+** Preparing 125 concurrent users for battle.
+The server is now under siege...
+Transactions:                  27732 hits
+Availability:                 100.00 %
+Elapsed time:                 271.22 secs
+Data transferred:            3197.39 MB
+Response time:                  1.19 secs
+Transaction rate:             102.25 trans/sec
+Throughput:                    11.79 MB/sec
+Concurrency:                  122.18
+Successful transactions:       27732
+Failed transactions:               0
+Longest transaction:           42.38
+Shortest transaction:           0.01
+
+(env) root@geekshop:/home/django/django# siege -i -f /home/django/django/geekshop/urls.txt -d0 -r17 -c125
+** SIEGE 4.0.4
+** Preparing 125 concurrent users for battle.
+The server is now under siege...
+Transactions:                  11281 hits
+Availability:                  98.77 %
+Elapsed time:                 111.71 secs
+Data transferred:             911.24 MB
+Response time:                  1.16 secs
+Transaction rate:             100.98 trans/sec
+Throughput:                     8.16 MB/sec
+Concurrency:                  117.65
+Successful transactions:       10089
+Failed transactions:             140
+Longest transaction:            7.98
+Shortest transaction:           0.00
+
+
