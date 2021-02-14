@@ -1,3 +1,7 @@
+from django.db import connection
+from django.db.models import F
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from authapp.models import ShopUser
 from adminapp.forms import UserAdminRegisterForm, UserAdminEditForm, ProductCategoryEditForm, ProductsEditForm
@@ -12,6 +16,22 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.product_set.update(is_active=True)
+        else:
+            instance.product_set.update(is_active=False)
+
+        db_profile_by_type(sender, 'UPDATE', connection.queries)
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
@@ -185,24 +205,49 @@ def categories_item_create(request):
     return render(request, 'adminapp/categories-item-create.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def categories_item_update(request, category_pk):
-    category = get_object_or_404(ProductCategory, pk=category_pk)
-    if request.method == 'POST':
-        form = ProductCategoryEditForm(data=request.POST, instance=category)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Категория успешно изменена!')
-            return HttpResponseRedirect(reverse('admin_staff:categories'))
-        else:
-            messages.warning(request, form.errors)
-    else:
-        form = ProductCategoryEditForm(instance=category)
-    context = {
-        'form': form,
-        'category': category,
-    }
-    return render(request, 'adminapp/categories-item-update.html', context)
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'adminapp/categories-item-update.html'
+    success_url = reverse_lazy('admin:categories')
+    form_class = ProductCategoryEditForm
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductCategoryUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'категории/редактирование'
+        return context
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))
+                db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+
+        return super().form_valid(form)
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def categories_item_update(request, category_pk):
+#     category = get_object_or_404(ProductCategory, pk=category_pk)
+#     if request.method == 'POST':
+#         form = ProductCategoryEditForm(data=request.POST, instance=category)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Категория успешно изменена!')
+#             return HttpResponseRedirect(reverse('admin_staff:categories'))
+#         else:
+#             messages.warning(request, form.errors)
+#     else:
+#         form = ProductCategoryEditForm(instance=category)
+#     context = {
+#         'form': form,
+#         'category': category,
+#     }
+#     return render(request, 'adminapp/categories-item-update.html', context)
 
 
 @user_passes_test(lambda u: u.is_superuser)

@@ -1,3 +1,11 @@
+
+http://81.200.26.171/
+http://81.200.26.171/products/
+http://81.200.26.171/products/category/1/
+http://81.200.26.171/products/category/2/
+http://81.200.26.171/products/category/3/
+http://81.200.26.171/products/category/4/
+
 (env) root@geekshop:/home/django/django# nano geekshop/urls.txt
 (env) root@geekshop:/home/django/django# siege -i -f /home/django/django/geekshop/urls.txt -d0 -r17 -c125
 ** SIEGE 4.0.4
@@ -32,5 +40,56 @@ Successful transactions:       10089
 Failed transactions:             140
 Longest transaction:            7.98
 Shortest transaction:           0.00
+
+кэш всего сайта
+root@geekshop:/home/django/django# siege -i -f urls.txt -d0 -r150 -c17
+** SIEGE 4.0.4
+** Preparing 17 concurrent users for battle.
+The server is now under siege...
+Transactions:                  34217 hits
+Availability:                 100.00 %
+Elapsed time:                 322.75 secs
+Data transferred:            4135.13 MB
+Response time:                  0.16 secs
+Transaction rate:             106.02 trans/sec
+Throughput:                    12.81 MB/sec
+Concurrency:                   16.83
+Successful transactions:       34200
+Failed transactions:               0
+Longest transaction:            1.56
+Shortest transaction:           0.01
+
+20 requests
+3.3 kB transferred
+1.9 MB resources
+Finish: 253 ms
+DOMContentLoaded: 159 ms
+Load: 220 ms
+
+без кэша всего сайта
+root@geekshop:/home/django/django# siege -i -f urls.txt -d0 -r150 -c17
+** SIEGE 4.0.4
+** Preparing 17 concurrent users for battle.
+The server is now under siege...
+Transactions:                  34475 hits
+Availability:                 100.00 %
+Elapsed time:                 331.39 secs
+Data transferred:            4208.45 MB
+Response time:                  0.16 secs
+Transaction rate:             104.03 trans/sec
+Throughput:                    12.70 MB/sec
+Concurrency:                   16.75
+Successful transactions:       34458
+Failed transactions:               0
+Longest transaction:            1.40
+Shortest transaction:           0.01
+
+
+20 requests
+3.3 kB transferred
+1.9 MB resources
+Finish: 823 ms
+DOMContentLoaded: 641 ms
+Load: 765 ms
 
 
