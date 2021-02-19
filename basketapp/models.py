@@ -49,7 +49,9 @@ class Basket(models.Model):
         return Basket.objects.filter(pk=pk).first()
 
     @staticmethod
-    def get_items(user):
+    def get_items(user, product=None):
+        if product:
+            return Basket.objects.filter(user=user, product=product).select_related()
         return Basket.objects.filter(user=user).select_related()
 
     # Решение изменением моделей

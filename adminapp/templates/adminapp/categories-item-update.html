@@ -10,7 +10,7 @@
         </div>
     {% endif %}
     <h1 class="mt-4">Изменение категории</h1>
-    <form action="{% url 'admin_staff:categories_item_update' category.pk %}" method="POST">
+    <form action="{% url 'admin_staff:categories_item_update' 1 %}" method="POST">
         {% csrf_token %}
         {{ form.as_table }}
         <div class="form-row">

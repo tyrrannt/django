@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from basketapp.models import Basket
 from mainapp.models import Product
@@ -7,11 +8,15 @@ from authapp.forms import ShopUserEditForm
 from django.contrib.auth.decorators import login_required
 
 
+def get_product(user, product=None):
+    return Basket.objects.filter(user=user, product=product)
+
+
 @login_required
 def basket(request):
     title = 'Просмотр корзины'
     edit_form = ShopUserEditForm(instance=request.user)
-    baskets = Basket.objects.filter(user=request.user).select_related()
+    baskets = Basket.get_items(user=request.user)
     content = {
         'title': title,
         'edit_form': edit_form,
@@ -25,7 +30,7 @@ def basket(request):
 @login_required
 def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    basket = Basket.objects.filter(user=request.user, product=product).first()
+    basket = Basket.get_items(user=request.user, product=product).first()
     if not basket:
         basket = Basket(user=request.user, product=product)
     basket.quantity += 1
@@ -35,7 +40,7 @@ def basket_add(request, pk):
 
 @login_required
 def basket_all_remove(request):
-    baskets = Basket.objects.filter(user=request.user)
+    baskets = Basket.get_items(user=request.user)
     for basket in baskets:
         basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -58,7 +63,7 @@ def basket_edit(request, id, quantity):
             basket.save()
         else:
             basket.delete()
-        baskets = Basket.objects.filter(user=request.user)
+        baskets = Basket.get_items(user=request.user)
         context = {
             'baskets': baskets,
             'total_quantity': sum(basket.quantity for basket in baskets),
